@@ -1,0 +1,45 @@
+﻿@page
+@model AppRazor.Pages.LessonModel
+@{
+    ViewData["Title"] = "Lesson Page";
+    Layout = "/Pages/Shared/_Layout.cshtml";
+}
+
+<a asp-page="Mypage" >My Page</a>
+@*
+<h4>Введите данные</h4>
+<form method="post">
+    <p>
+    <label>Имя</label>
+    <input type="text" name="username" />
+    </p>
+    <p>
+    <label>Возраст </label>
+    <input type="number" name="age" />
+    </p>
+    <input type="submit" name="Отправить" />
+</form>
+@if (Request.Method == "POST")
+{
+    <h4>Полученные данные</h4>
+    <p>@Model.Username</p>
+    <p>@Model.Age</p>
+}*@
+
+<h2>@Model.Msg</h2>
+
+<form method="post" asp-antiforgery="true">
+    <p>
+        <label asp-for="product.Name">Название</label>
+        <input type="text" asp-for="product.Name" />
+    </p>
+    <p>
+        <label asp-for="product.Price">Название</label>
+        <input type="number" asp-for="product.Price" />
+    </p>
+    <p>
+        <label asp-for="product.Company">Название</label>
+        <input type="text" asp-for="product.Company" />
+    </p>
+    <input type="submit" value="Отправить" />
+</form>

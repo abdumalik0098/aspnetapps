@@ -1,0 +1,98 @@
+﻿@page
+@model AppRazor.Pages.MypageModel
+@{
+    ViewData["Title"] = "MyPage";
+}
+
+@* Условные выражения*@
+@{
+    string morning = "Good Morning";
+    string evening = "Good Evening";
+    string hello = "Hello";
+    int hour = DateTime.Now.Hour;
+}
+@if (hour < 12)
+{
+    <h2>@morning</h2>
+}
+else if (hour > 17)
+{
+    <h2>@evening</h2>
+}
+else
+{
+    <h2>@hello</h2>
+}
+
+@* Цикл *@
+@{
+    string[] people = { "Tom", "Sam", "Bob" };
+}
+<ul>
+    @for (var i = 0; i < people.Length; i++)
+    {
+        <li>@people[i]</li>
+    }
+</ul>
+
+@* Функции *@
+@functions
+{
+    public int Sum(int a, int b) 
+    {
+        return a + b;
+    }
+    public int Square(int n) => n * n;
+}
+<p>Sum of 5 and 4: <b> @Sum(5, 4)</b></p>
+<p>Square of 4: <b>@Square(4)</b></p>
+
+@using AppRazor
+
+@{
+    Person person = new Person();
+}
+<h4>@person.Name</h4>
+
+
+<h3>@Model.Hello</h3>
+<h3>@Model.datePrint()</h3>
+
+<h4>@Model.Message</h4>
+
+@*
+@functions{
+    public string Msg { get; set; } = "";
+    public void OnGet()
+    {
+        Msg = "Hello from Mypage page with Get Request";
+    }
+}
+<h4>@Msg</h4>*@
+
+@*<h4>Request headers </h4>
+<table>
+    @foreach (var item in Request.Headers)
+    {
+        <tr>
+            <td>@item.Key</td>
+            <td>@item.Value</td>
+        </tr>
+    }
+</table>*@
+
+ 
+<h2>Ввeдите имена сотрудников</h2>
+<form method="post">
+    <p><input name="people" /></p>
+    <p><input name="people" /></p>
+    <p><input name="people" /></p>
+    <input type="submit" value="Отправить" />
+</form>
+<h3>Список сотрудников</h3>
+<ul>
+    @foreach(var per in Model.People)
+    {
+        <li>@per</li>  
+    }
+</ul>

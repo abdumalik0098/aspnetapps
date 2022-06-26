@@ -1,0 +1,31 @@
+﻿@page 
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+ 
+@model RazorPagesApp.Pages.IndexModel
+ 
+<h2>Список пользователей</h2>
+<p><a href="/Create">Добавить пользователя</a></p>
+    
+<table>
+
+    <tbody>
+        <tr>
+            <th>Имя</th>
+            <th>Возраст</th>
+        </tr>
+        @foreach (var item in Model.Users)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Age</td>
+                <td>
+                    <form method="post">
+                        <a asp-page="Edit" asp-route-id="@item.Id">Изменить</a>
+                        <button type="submit" asp-page-handler="delete" asp-route-id="@item.Id">Удалить</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>

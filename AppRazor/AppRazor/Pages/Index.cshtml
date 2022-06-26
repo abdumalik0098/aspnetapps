@@ -1,0 +1,26 @@
+﻿@page
+@model AppRazor.Pages.IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Date: @DateTime.Now.ToShortDateString()  </p>
+    <p>Time: @DateTime.Now.ToShortTimeString() </p>
+</div>
+
+
+@*@functions {
+     
+    public string Message { get; private set; } = "";
+    public void OnGet() => Message = "Введите свое имя";
+         
+    public void OnPost(string username) => Message = $"Ваше имя: {username}";
+}*@
+
+<h4>@Model.Message</h4>
+<form method="post">
+    <input type="text" name="username" />
+    <input type="submit" name="Отправить" />
+</form>

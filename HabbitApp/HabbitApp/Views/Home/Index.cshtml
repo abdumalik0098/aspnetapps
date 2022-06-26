@@ -1,0 +1,73 @@
+﻿@model IEnumerable<HabbitApp.Models.Habbit>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Система привычек</h1>
+    
+</div>
+<div class="container">
+
+ 
+<h2>Список привычек</h2>
+<p><a asp-action="Create">Добавить </a></p>
+<table class="table">
+     <tr><th>Название</th><th>Триггер</th><th>Продол.</th><th>Таймер</th><th>Награда</th></tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.Trigger</td>
+            <td>@item.Duration</td>
+            <td>
+                <div id="sekundomers">
+                <div class="time">
+                  <span id="minute">@item.Timer</span>
+                  @*<span id="second">00</span>
+                  @*<span id="ms">00</span>*@
+                  @*<button id="vpered" onclick="vpered();">Старт</button>
+                  <button id="sanovka" onclick="sanovka();">Стоп</button>*@
+                </div>
+                </div>
+            </td>
+            <td>@item.Reward</td>
+            <td>
+                <form asp-controller="Home" asp-action="Delete" method="post"  asp-route-id="@item.Id">
+                    <input class="btn btn-danger" type="submit" value="Удалить" />
+                </form>
+            </td>
+            <td>
+                <a class="btn btn-primary" asp-action="Edit" asp-controller="Home" asp-route-id="@item.Id">Изменить</a>
+            </td>
+        </tr>
+    }
+</table>
+</div>
+
+<script>
+var timer = 0;
+var tm = document.getElementById('minute');
+var timerInterval;
+var ms = document.getElementById('ms');
+var second = document.getElementById('second');
+var minute = document.getElementById('minute');
+
+function vpered() {
+  sanovka();
+  timerInterval = setInterval(function() {
+  timer += 1/60;
+  //msVal = Math.floor((timer - Math.floor(timer))*100);
+  secondVal = Math.floor(timer) - Math.floor(timer/60) * 60;
+  minuteVal = Math.floor(timer/60);
+  //ms.innerHTML = msVal < 10 ? "0" + msVal.toString() : msVal;
+  second.innerHTML = secondVal < 10 ? "0" + secondVal.toString() : secondVal;
+  minute.innerHTML = minuteVal < 10 ? "0" + minuteVal.toString() : minuteVal;
+  }, 1000/60);
+}
+
+function sanovka() {
+  clearInterval(timerInterval);
+}
+</script>
